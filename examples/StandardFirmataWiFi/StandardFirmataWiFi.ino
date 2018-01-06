@@ -1029,7 +1029,7 @@ void loop()
         analogPin = PIN_TO_ANALOG(pin);
         if (analogInputsToReport & (1 << analogPin)) {
           // send only 10 samples
-          for(int i 0; i < 8; i++){
+          for(int i = 0; i < 8; i++){
             Firmata.sendAnalog(analogPin, analogRead(analogPin));
           }
           //set report to 0
