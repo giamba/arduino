@@ -1028,7 +1028,12 @@ void loop()
       if (IS_PIN_ANALOG(pin) && Firmata.getPinMode(pin) == PIN_MODE_ANALOG) {
         analogPin = PIN_TO_ANALOG(pin);
         if (analogInputsToReport & (1 << analogPin)) {
-          Firmata.sendAnalog(analogPin, analogRead(analogPin));
+          // send only 10 samples
+          for(int i 0; i < 8; i++){
+            Firmata.sendAnalog(analogPin, analogRead(analogPin));
+          }
+          //set report to 0
+          analogInputsToReport = analogInputsToReport & ~ (1 << analogPin); 
         }
       }
     }
